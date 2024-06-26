@@ -11,4 +11,9 @@ class Alternative extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function evaluations()
+    {
+        return $this->hasMany(Evaluation::class, 'id_alternative');
+    }
 }

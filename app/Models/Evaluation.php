@@ -13,4 +13,13 @@ class Evaluation extends Model
         'id_criteria',
         'value',
     ];
+    public function criteria()
+    {
+        return $this->belongsTo(Criteria::class, 'id_criteria');
+    }
+
+    public function alternative()
+    {
+        return $this->belongsTo(Alternative::class, 'id_alternative');
+    }
 }

@@ -6,9 +6,12 @@ use App\Filament\Resources\EvaluationResource\Pages;
 use App\Filament\Resources\EvaluationResource\RelationManagers;
 use App\Models\Evaluation;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -23,7 +26,16 @@ class EvaluationResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Select::make('id_alternative')
+                    ->label('Alternative')
+                    ->relationship('alternative', 'name')
+                    ->required(),
+                Select::make('id_criteria')
+                    ->label('Criteria')
+                    ->relationship('criteria', 'criteria')
+                    ->required(),
+                TextInput::make('value')
+                    ->required(),
             ]);
     }
 
@@ -31,7 +43,9 @@ class EvaluationResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('alternative.name')->label('Alternative'),
+                TextColumn::make('criteria.criteria')->label('Criteria'),
+                Tables\Columns\TextColumn::make('value'),
             ])
             ->filters([
                 //
