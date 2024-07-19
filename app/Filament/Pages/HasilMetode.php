@@ -17,7 +17,7 @@ class HasilMetode extends Page
         $criteria = Criteria::select('id', 'criteria', 'weight')
             ->orderBy('id')
             ->get();
-
+        
         //--- inisialisasi array kriteria 'C'
         $C = [];
         //--- inisialisasi array weight/bobot 'W'
@@ -35,7 +35,7 @@ class HasilMetode extends Page
             ];
             ++$n;
         }
-        // dd($n);
+
         $evaluation = Evaluation::select('id_criteria', 'id_alternative', 'value')
             ->orderBy('id_alternative')
             ->orderBy('id_criteria')
@@ -54,6 +54,8 @@ class HasilMetode extends Page
             }
             $X[$row->id_alternative][$row->id_criteria] = $row->value;
         }
+
+        //Normalisasi bobot
         //--- menghitung total jumlah bobot
         $sigma_w = array_sum($W);
         //--- membagi masing-masing bobot dengan total jumlah bobot
@@ -62,7 +64,6 @@ class HasilMetode extends Page
         }
 
 
-        // dd($criteria);
         //--- inisialisasi array 'S'
         $S = [];
         $criterias = Criteria::all()->keyBy('id')->toArray();

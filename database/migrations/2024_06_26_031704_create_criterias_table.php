@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('criterias', function (Blueprint $table) {
-            $table->id('id_criteria');
+            $table->id('id');
             $table->string('criteria');
             $table->float('weight');
             $table->enum('attribute', ['benefit', 'cost']);
